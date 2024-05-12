@@ -7,6 +7,66 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <!-- start -->
+        <!-- Defining two columns for the layout -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Movie Listings -->
+        <StackPanel Grid.Column="0" Margin="10">
+            <!-- Title -->
+            <TextBlock Text="Movie Listings" FontWeight="Bold"/>
+            <!-- ListBox to display the Movie Items -->
+            <ListBox x:Name="listBoxMovies" SelectionChanged="ListBoxMovies_SelectionChanged" Height="397">
+                <!-- Defining a DataTemplate to customize ListBox items -->
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <!-- StackPanel to arrange content horizontally -->
+                        <StackPanel Orientation="Horizontal" Margin="5">
+                            <!-- Display the Movie Image -->
+                            <Image Source="{Binding ImageName}" Width="100" Height="100" />
+                            <!-- Nested StackPanel to arrange Text vertically -->
+                            <StackPanel Orientation="Vertical" Margin="5">
+                                <!-- TextBlock for movie title -->
+                                <TextBlock Text="{Binding Title}" FontWeight="Bold" FontSize="16"/>
+                                <!-- TextBlock for movie cast -->
+                                <TextBlock Text="{Binding Cast}" FontStyle="Italic" FontSize="14"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+
+        <!-- Movie Synopsis and booking section -->
+        <StackPanel Grid.Column="1" Margin="10">
+            <!-- TextBlock for section title -->
+            <TextBlock Text="Movie Synopsis" FontWeight="Bold"/>
+            <!-- TextBox to display movie synopsis -->
+            <TextBox x:Name="textBoxSynopsis" TextWrapping="Wrap" IsReadOnly="True" Height="200" Margin="0,0,0,10"/>
+            <!-- StackPanel to display available seats -->
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Available Seats" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <!-- TextBox to display available seats -->
+                <TextBox x:Name="textBoxAvailableSeats" Width="50" IsReadOnly="True"/>
+            </StackPanel>
+            <!-- StackPanel to input required seats -->
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <TextBlock Text="Required Seats" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <!-- TextBox to input required seats -->
+                <TextBox x:Name="textBoxRequiredSeats" Width="50"/>
+            </StackPanel>
+            <!-- StackPanel to select movie date -->
+            <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                <!-- DatePicker control to select movie date -->
+                <DatePicker x:Name="DatePickerForMovies" SelectedDateChanged="DateChanged" Width="112"/>
+            </StackPanel>
+            <!-- StackPanel for booking button -->
+            <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                <!-- Button to book seats -->
+                <Button Content="Book Seats" Click="ButtonBookSeats_Click"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>
